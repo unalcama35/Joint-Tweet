@@ -1,0 +1,62 @@
+<div class="row" style="background-color: white; margin:10px" (keyup.enter)="sendID()">
+
+  <h1 *ngIf="currentUser" class="card-text" style="color:black; font:bold">{{currentUser}}'s likes</h1>
+  <h1 *ngIf="currentUser ==''" class="card-text" style="color:black; font:bold">Twitter likes</h1>
+
+  <div class="input-group mb-3" style="width: 1495px">
+    <div class="input-group-prepend">
+      <button class="btn btn-outline-dark" type="button" (click)="sendID()">Username @</button>
+
+    </div>
+    <input type="text" [(ngModel)]="userHandle" class="form-control" placeholder="" aria-label=""
+      aria-describedby="basic-addon1">
+  </div>
+
+  <ng-container *ngIf="loading==false">
+    <div *ngIf="(undefined === favs)" style="padding: 15px;">
+      <div class="text-center">
+        <div class="spinner-border" role="status" style="width: 3rem; height: 3rem;">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+
+    </div>
+    <div *ngFor="let user of users" class="col-3 card" style="margin:5px; width: 18rem; height: 15rem;  ">
+      <a [href]="user.profile" target=”_blank” style="text-decoration: none; color: black">
+
+        <img [src]="user.pic" class="card-img" style="margin-left: 6rem; height: 70px; width: 70px; margin-top:5px;" />
+      </a>
+
+      <div class="card-body d-flex flex-column " style="text-align: center;  color: black">
+        <h2 class="card-title" style="text-align: center;">{{user.username}}</h2>
+        <select class="form-select mt-auto" onchange="window.open(this.value , '_blank');" target=”_blank” style="text-align:center">
+          <option value="">
+            <h3 *ngIf="user.count == 1" class="card-text">{{user.count}} like</h3>
+            <h3 *ngIf="user.count != 1" class="card-text">{{user.count}} likes</h3>
+
+          </option>
+          <option *ngFor="let tweet of user.tweets" value={{tweet.link}}>{{tweet.date}}</option>
+        </select>
+        <!-- <a (click)="addToCart(product)"  class="btn btn-primary">Add to cart</a> -->
+      </div>
+    </div>
+  </ng-container>
+  <div *ngIf="loading==true && notFoundError==false">
+    <div class="text-center">
+      <div class="spinner-border" role="status" style="width: 3rem; height: 3rem;">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="notFoundError==true">
+        <h1 class= "text-center">Username not found. Try again. </h1>
+      
+    
+  </div>
+  <div *ngIf="privateError==true">
+    <h1 class= "text-center">User's account is private.</h1>
+  
+
+</div>
+</div>

@@ -1,0 +1,25 @@
+<div class="px-4 py-5 my-5 text-center" >
+    <img class="d-block mx-auto mb-4" style="margin-top:7%" src="https://cdn-icons-png.flaticon.com/512/1051/1051331.png?w=360" alt="" width="55" height="57">
+   
+      <form [formGroup]="tweetForm" (ngSubmit)="submitTweet()">
+        <div class="form-group">
+            <input type="text" id="tweetdata" name="tweetdata" formControlName="tweetdata" 
+            class="form-control-5" placeholder="Tweet Text" style="width:460px; border-radius: 5px; ">
+          
+    
+        </div>
+    
+    
+        <button type="submit" class="btn btn-dark" style="margin-top:15px" > Tweet</button>
+    
+    </form>
+
+
+
+
+
+  </div>
+
+
+
+
